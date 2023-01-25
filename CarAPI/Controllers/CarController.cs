@@ -1,68 +1,91 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarAPI.Service.IService;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CarAPI.Controllers
 {
-    public class CarController : ControllerBase
+    public class CarController : Controller
     {
-        private static List<Car> cars = new List<Car>()
+        private readonly ICarService carService;
+        public CarController(ICarService carService)
         {
-             new Car
-             {
-                 Id = 1,
-                 Brand = "Dodge",
-                 Model = "Challanger SRT",
-                 Power = 707,
-                 ProductionYear = 2020
-             },
-
-             new Car
-             {
-                 Id = 2,
-                 Brand = "BMW",
-                 Model = "M3",
-                 Power = 350,
-                 ProductionYear = 2016
-             }
-        };
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Car>> GetCar(int id)
+            this.carService = carService;
+        }
+    
+        // GET: CarController
+        public ActionResult Index()
         {
-            var car = cars.Find(x => x.Id == id);
-            if (car == null)
-                return NotFound("Car not found");
-            return Ok(cars);
+            return View();
         }
 
+        // GET: CarController/Details/5
+        public ActionResult GetById(int id)
+        {
+            var result = carService.GetCarById(id);
+            return View(result);
+        }
+
+        // GET: CarController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: CarController/Create
         [HttpPost]
-        public async Task<ActionResult<List<Car>>> AddCar(Car car)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
         {
-            cars.Add(car);
-            return Ok(cars);
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        [HttpPut]
-        public async Task<ActionResult<List<Car>>> UpdateCar(Car update)
+        // GET: CarController/Edit/5
+        public ActionResult Edit(int id)
         {
-            var car = cars.Find(x => x.Id == update.Id);
-
-            car.Brand = update.Brand;
-            car.Model = update.Model;
-            car.Power = update.Power;
-            car.ProductionYear = update.ProductionYear;
-
-            return Ok(cars);
+            return View();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<List<Car>>> DeleteCar(int id)
+        // POST: CarController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
         {
-            var car = cars.Find(x => x.Id == id);
-            if (car == null)
-                return NotFound("Car not found");
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
-            cars.Remove(car);
-            return Ok(cars);
+        // GET: CarController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: CarController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
