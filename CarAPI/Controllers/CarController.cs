@@ -3,6 +3,7 @@ using CarAPI.Models;
 using CarAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarAPI.Controllers
 {
@@ -24,6 +25,7 @@ namespace CarAPI.Controllers
         }
 
         // GET: CarController/Details/5
+        // [HttpGet ("{id}")]
         public ActionResult GetById(int id)
         {
             var result = carRepository.GetCarById(id);
@@ -33,14 +35,8 @@ namespace CarAPI.Controllers
         // GET: CarController/Create
         public ActionResult Create()
         {
-            Car newCar = new Car();
-            newCar.Brand = "Audi";
-            newCar.Model = "A3";
-            newCar.Power = 1;
-            newCar.ProductionYear = 1;
-
-            carRepository.CreateCar(newCar);
-            return View(newCar);
+            
+            return View();
         }
 
         // POST: CarController/Create

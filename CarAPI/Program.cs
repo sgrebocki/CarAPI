@@ -3,20 +3,17 @@ global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore;
 using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
-using CarAPI.Service;
-using CarAPI.Service.IService;
 using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICarRepository, CarRepositories>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectionString"));
 });
 
 

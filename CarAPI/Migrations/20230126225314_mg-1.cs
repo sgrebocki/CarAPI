@@ -5,7 +5,7 @@
 namespace CarAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class mg1 : Migration
+    public partial class mg2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
