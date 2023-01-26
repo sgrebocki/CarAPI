@@ -5,6 +5,7 @@ using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
 using CarAPI.Service;
 using CarAPI.Service.IService;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICarRepository, CarRepositories>();
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

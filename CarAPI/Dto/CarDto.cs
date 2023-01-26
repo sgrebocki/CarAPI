@@ -1,16 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-
-namespace CarAPI.Models
+namespace CarAPI.Dto
 {
-    public class Car
+    public class CarDto
     {
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
-        public int Id { get; set; }
 
         [Display(Name = "Marka")]
         [Required(ErrorMessage = "Podaj markę samochodu")]
@@ -27,5 +21,6 @@ namespace CarAPI.Models
         [Display(Name = "Rok produkcji")]
         [Required]
         public int ProductionYear { get; set; }
+
     }
 }

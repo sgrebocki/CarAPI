@@ -16,6 +16,7 @@ namespace CarAPI.Repositories
         public void CreateCar(Car car)
         {
             _context.Cars.Add(car);
+            _context.SaveChanges();
         }
 
         public void DeleteCar(int Id)

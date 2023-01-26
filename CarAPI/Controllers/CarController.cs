@@ -1,4 +1,6 @@
-﻿using CarAPI.Service.IService;
+﻿using AutoMapper;
+using CarAPI.Models;
+using CarAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,53 +8,60 @@ namespace CarAPI.Controllers
 {
     public class CarController : Controller
     {
-        private readonly ICarService carService;
-        public CarController(ICarService carService)
+        private readonly ICarRepository carRepository;
+        private readonly IMapper mapper;
+        public CarController(ICarRepository carRepository, IMapper mapper)
         {
-            this.carService = carService;
+            this.carRepository = carRepository;
+            this.mapper = mapper;
         }
     
         // GET: CarController
         public ActionResult Index()
         {
-            var result = carService.GetAll();
+            var result = carRepository.GetAll();
             return View(result);
         }
 
         // GET: CarController/Details/5
         public ActionResult GetById(int id)
         {
-            var result = carService.GetCarById(id);
+            var result = carRepository.GetCarById(id);
             return View(result);
         }
 
         // GET: CarController/Create
         public ActionResult Create()
         {
-            var result = carService.CreateCar;
-            return View(result);
+            Car newCar = new Car();
+            newCar.Brand = "Audi";
+            newCar.Model = "A3";
+            newCar.Power = 1;
+            newCar.ProductionYear = 1;
+
+            carRepository.CreateCar(newCar);
+            return View(newCar);
         }
 
         // POST: CarController/Create
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ICarService carService)
-                    public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Car car)
         {
-            try
+
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                carRepository.CreateCar(car);
+                return View(car);
             }
-            catch
-            {
-                return View();
-            }
+
+            return this.StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         // GET: CarController/Edit/5
         public ActionResult Edit()
         {
-            var result = carService.UpdateCar;
+            var result = carRepository.UpdateCar;
             return View(result);
         }
 
