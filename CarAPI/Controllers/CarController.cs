@@ -15,7 +15,8 @@ namespace CarAPI.Controllers
         // GET: CarController
         public ActionResult Index()
         {
-            return View();
+            var result = carService.GetAll();
+            return View(result);
         }
 
         // GET: CarController/Details/5
@@ -28,34 +29,29 @@ namespace CarAPI.Controllers
         // GET: CarController/Create
         public ActionResult Create()
         {
-            return View();
+            var result = carService.CreateCar;
+            return View(result);
         }
 
         // POST: CarController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CarController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Create(ICarService carService)
         {
             return View();
         }
 
+        // GET: CarController/Edit/5
+        public ActionResult Edit()
+        {
+            var result = carService.UpdateCar;
+            return View(result);
+        }
+
         // POST: CarController/Edit/5
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(IFormCollection collection)
         {
             try
             {

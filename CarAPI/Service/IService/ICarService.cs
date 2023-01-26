@@ -1,4 +1,6 @@
-﻿namespace CarAPI.Service.IService
+﻿using CarAPI.Models;
+
+namespace CarAPI.Service.IService
 {
     public interface ICarService
     {

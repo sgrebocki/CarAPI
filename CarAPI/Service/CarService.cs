@@ -1,4 +1,5 @@
-﻿using CarAPI.Repositories.IRepositories;
+﻿using CarAPI.Models;
+using CarAPI.Repositories.IRepositories;
 using CarAPI.Service.IService;
 using Microsoft.IdentityModel.Tokens;
 

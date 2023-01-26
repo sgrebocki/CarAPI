@@ -1,5 +1,7 @@
-﻿using CarAPI.Repositories.IRepositories;
+﻿using CarAPI.Models;
+using CarAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CarAPI.Repositories
 {
@@ -46,6 +48,11 @@ namespace CarAPI.Repositories
 
         public void UpdateCar(Car car)
         {
+            if (car == null)
+            {
+                throw new Exception("Car not found");
+            }
+
             _context.Cars.Update(car);
             _context.SaveChanges();
         }

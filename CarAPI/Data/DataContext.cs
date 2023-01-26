@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CarAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarAPI.Data
 {

@@ -1,4 +1,6 @@
-﻿namespace CarAPI.Repositories.IRepositories
+﻿using CarAPI.Models;
+
+namespace CarAPI.Repositories.IRepositories
 {
     public interface ICarRepository
     {
