@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230126013559_mg-1")]
-    partial class mg1
+    [Migration("20230126225314_mg-2")]
+    partial class mg2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
