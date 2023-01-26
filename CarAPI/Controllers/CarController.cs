@@ -24,6 +24,7 @@ namespace CarAPI.Controllers
         }
 
         // GET: CarController/Details/5
+        // [HttpGet ("{id}")]
         public ActionResult GetById(int id)
         {
             var result = carRepository.GetCarById(id);
