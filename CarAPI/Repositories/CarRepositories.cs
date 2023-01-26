@@ -48,13 +48,12 @@ namespace CarAPI.Repositories
 
         public void UpdateCar(Car car)
         {
-            if (car == null)
+            Car CarToUpdate = _context.Cars.Where(c => c.Id == car.Id).FirstOrDefault();
+            if (CarToUpdate != null)
             {
-                throw new Exception("Car not found");
-            }
-
-            _context.Cars.Update(car);
-            _context.SaveChanges();
+                _context.Cars.Update(car);
+                _context.SaveChanges();
+            }          
         }
     }
 }

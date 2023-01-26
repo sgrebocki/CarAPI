@@ -37,8 +37,16 @@ namespace CarAPI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(ICarService carService)
+                    public ActionResult Create(IFormCollection collection)
         {
-            return View();
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: CarController/Edit/5
