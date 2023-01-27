@@ -16,33 +16,33 @@ namespace CarAPI.Controllers
             this.carRepository = carRepository;
             this.mapper = mapper;
         }
-    
-        // GET: CarController
+
+        // GET: /Car
+        [HttpGet ("/Car")]
         public ActionResult Index()
         {
             var result = carRepository.GetAll();
             return View(result);
         }
 
-        // GET: CarController/Details/5
-        // [HttpGet ("{id}")]
-        public ActionResult GetById(int id)
+        // GET: /Car/{id}
+        [HttpGet ("/Car/{id}")]
+        public async Task<ActionResult> GetById(int id)
         {
             var result = carRepository.GetCarById(id);
             return View(result);
         }
 
-        // GET: CarController/Create
+        // GET: /Car/Create
         public ActionResult Create()
         {
-            
             return View();
         }
 
-        // POST: CarController/Create
-        [HttpPost, ActionName("Create")]
+        // POST: /Car/Create
+        [HttpPost ("/Car/Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Car car)
+        public async Task<ActionResult> Create(Car car)
         {
 
             if (ModelState.IsValid)
@@ -50,25 +50,24 @@ namespace CarAPI.Controllers
                 carRepository.CreateCar(car);
                 return View(car);
             }
-
-            return this.StatusCode(StatusCodes.Status500InternalServerError);
+            return View();
         }
 
-        // GET: CarController/Edit/5
+        // GET: Car/Edit
         public ActionResult Edit()
         {
-            var result = carRepository.UpdateCar;
-            return View(result);
+            return View();
         }
 
-        // POST: CarController/Edit/5
-        [HttpPost, ActionName("Edit")]
+        // PUT: CarController/Edit
+        [HttpPut ("/Car/Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(IFormCollection collection)
+        public async Task<ActionResult> Edit(Car car)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                carRepository.UpdateCar(car);
+                return View(car);
             }
             catch
             {
@@ -76,20 +75,21 @@ namespace CarAPI.Controllers
             }
         }
 
-        // GET: CarController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Car/Delete
+        public ActionResult Delete()
         {
             return View();
         }
 
-        // POST: CarController/Delete/5
-        [HttpPost]
+        // DELETE: Car/Delete/{id}
+        [HttpDelete ("/Car/Delete/{id}")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+               carRepository.DeleteCar(id);
+               return View(id);
             }
             catch
             {
