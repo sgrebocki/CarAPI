@@ -3,14 +3,13 @@ global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore;
 using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
-using AutoMapper;
+using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<ICarRepository, CarRepositories>();
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<ICarRepositories, CarRepositories>();
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectionString"));
@@ -54,3 +53,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+var client = new HttpClient();
+client.DefaultRequestHeaders.Add("Swagger", "true");

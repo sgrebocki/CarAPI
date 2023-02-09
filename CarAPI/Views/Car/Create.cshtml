@@ -1,9 +1,8 @@
 ﻿@model CarAPI.Models.Car
-
-
 @{
+    ViewData["Title"] = "Dodaj samochód";
 }
-<h1>Create new car</h1>
+<h1>Dodaj samochód</h1>
 <form method="post" action="Create" class="mt-5">
   <div class="form-group">
         <label for="" class="form-label">Marka</label>
@@ -19,7 +18,7 @@
   </div>
   <div class="form-group">
         <label for="" class="form-label">Rok produkcji</label>       
-        <input type="number" placeholder="YYYY" min="1950" max="2100" asp-for="ProductionYear">
+        <input type="number" class="form-control" placeholder="YYYY" min="1950" max="2100" asp-for="ProductionYear">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

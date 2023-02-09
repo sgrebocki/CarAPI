@@ -1,11 +1,12 @@
 ﻿using CarAPI.Models;
 using CarAPI.Repositories.IRepositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CarAPI.Repositories
 {
-    public class CarRepositories : ICarRepository
+    public class CarRepositories : ICarRepositories
     {
         private readonly DataContext _context;
         public CarRepositories(DataContext context)
@@ -49,12 +50,8 @@ namespace CarAPI.Repositories
 
         public void UpdateCar(Car car)
         {
-            Car CarToUpdate = _context.Cars.Where(c => c.Id == car.Id).FirstOrDefault();
-            if (CarToUpdate != null)
-            {
                 _context.Cars.Update(car);
-                _context.SaveChanges();
-            }          
+                _context.SaveChanges();         
         }
     }
 }

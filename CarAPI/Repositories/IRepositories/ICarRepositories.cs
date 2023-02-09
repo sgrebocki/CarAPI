@@ -2,7 +2,7 @@
 
 namespace CarAPI.Repositories.IRepositories
 {
-    public interface ICarRepository
+    public interface ICarRepositories
     {
         Car GetCarById(int Id);
         IEnumerable<Car> GetAll();

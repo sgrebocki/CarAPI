@@ -9,7 +9,6 @@ namespace CarAPI.Models
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
         public int Id { get; set; }
 
         [Display(Name = "Marka")]

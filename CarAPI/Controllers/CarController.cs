@@ -1,97 +1,108 @@
 ﻿using AutoMapper;
 using CarAPI.Models;
+using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace CarAPI.Controllers
 {
+    [Route("Car/[action]")]
     public class CarController : Controller
     {
-        private readonly ICarRepository carRepository;
-        private readonly IMapper mapper;
-        public CarController(ICarRepository carRepository, IMapper mapper)
+        private readonly ICarRepositories _repo;
+
+        public CarController(ICarRepositories repo)
         {
-            this.carRepository = carRepository;
-            this.mapper = mapper;
+            _repo = repo;
         }
 
-        // GET: /Car
-        [HttpGet ("/Car")]
-        public ActionResult Index()
+        [HttpGet]
+        public IActionResult Index()
         {
-            var result = carRepository.GetAll();
+            var cars = _repo.GetAll();
+            return View(cars);
+        }
+
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetById(int id)
+        {
+            var result = _repo.GetCarById(id);
             return View(result);
         }
 
-        // GET: /Car/{id}
-        [HttpGet ("/Car/{id}")]
-        public async Task<ActionResult> GetById(int id)
-        {
-            var result = carRepository.GetCarById(id);
-            return View(result);
-        }
-
-        // GET: /Car/Create
-        public ActionResult Create()
+        [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult Create()
         {
             return View();
         }
 
-        // POST: /Car/Create
-        [HttpPost ("/Car/Create")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Car car)
-        {
-
-            if (ModelState.IsValid)
-            {
-                carRepository.CreateCar(car);
-                return View(car);
-            }
-            return View();
-        }
-
-        // GET: Car/Edit
-        public ActionResult Edit()
-        {
-            return View();
-        }
-
-        // PUT: CarController/Edit
-        [HttpPut ("/Car/Edit")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Car car)
+        [HttpPost]
+        public IActionResult Create(Car car)
         {
             try
             {
-                carRepository.UpdateCar(car);
+                if (ModelState.IsValid)
+                {
+                    _repo.CreateCar(car);
+                    return RedirectToAction(nameof(Index));
+                }
                 return View(car);
             }
-            catch
+            catch (Exception)
             {
                 return View();
             }
         }
 
-        // GET: Car/Delete
-        public ActionResult Delete()
+        [HttpGet]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult Edit(int id)
         {
-            return View();
+            var car = _repo.GetCarById(id);
+            return View(car);
         }
 
-        // DELETE: Car/Delete/{id}
-        [HttpDelete ("/Car/Delete/{id}")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int id)
+        [HttpPut]
+        public IActionResult Edit(Car car)
         {
             try
             {
-               carRepository.DeleteCar(id);
-               return View(id);
+                if (ModelState.IsValid)
+                {
+                    _repo.UpdateCar(car);
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
-            catch
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        //[HttpGet]
+        //[ApiExplorerSettings(IgnoreApi = true)]
+        //public IActionResult Delete(int id)
+        //{
+        //    var car = _repo.GetCarById(id);
+        //    return View(car);
+        //}
+
+        [Route("{id}")]
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _repo.DeleteCar(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
             {
                 return View();
             }
