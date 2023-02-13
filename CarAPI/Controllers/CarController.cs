@@ -2,6 +2,7 @@
 using CarAPI.Models;
 using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,7 @@ namespace CarAPI.Controllers
             return View(result);
         }
 
+        [Authorize]
         [HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Create()
@@ -58,7 +60,7 @@ namespace CarAPI.Controllers
                 return View();
             }
         }
-
+        [Authorize]
         [HttpGet]
         [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Edit(int id)
@@ -66,7 +68,7 @@ namespace CarAPI.Controllers
             var car = _repo.GetCarById(id);
             return View(car);
         }
-
+        [Authorize]
         [HttpPut]
         public IActionResult Edit(Car car)
         {
@@ -92,7 +94,7 @@ namespace CarAPI.Controllers
         //    var car = _repo.GetCarById(id);
         //    return View(car);
         //}
-
+        [Authorize]
         [Route("{id}")]
         [HttpDelete]
         public IActionResult Delete(int id)

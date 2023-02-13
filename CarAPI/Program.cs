@@ -1,8 +1,10 @@
 global using CarAPI.Data;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore;
+using CarAPI.Models;
 using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
+using Microsoft.AspNetCore.Identity;
 using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,19 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnectionString"));
 });
 
+builder.Services.AddIdentity<UserModel, IdentityRole >(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireNonAlphanumeric = false ;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+
+
+
+
+
+}).AddEntityFrameworkStores<DataContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -45,6 +60,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
