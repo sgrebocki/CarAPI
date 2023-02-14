@@ -27,6 +27,13 @@ namespace CarAPI.Controllers
             return View(cars);
         }
 
+        [HttpGet]
+        public IActionResult List()
+        {
+            var products = _repo.GetAll();
+            return View(products);
+        }
+
         [Route("{id}")]
         [HttpGet]
         public IActionResult GetById(int id)
@@ -42,6 +49,8 @@ namespace CarAPI.Controllers
         {
             return View();
         }
+
+      
 
         [HttpPost]
         public IActionResult Create(Car car)
@@ -69,7 +78,7 @@ namespace CarAPI.Controllers
             return View(car);
         }
         [Authorize]
-        [HttpPut]
+        [HttpPost]
         public IActionResult Edit(Car car)
         {
             try
@@ -96,13 +105,13 @@ namespace CarAPI.Controllers
         //}
         [Authorize]
         [Route("{id}")]
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             try
             {
                 _repo.DeleteCar(id);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("List");
             }
             catch (Exception)
             {

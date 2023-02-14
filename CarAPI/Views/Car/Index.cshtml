@@ -25,8 +25,19 @@
                 <td>@car.Model</td>
                 <td>@car.Power</td>
                 <td>@car.ProductionYear</td>
-                <td><button type="submit">Usuń</button></td>
-                <td><button type="submit">Edytuj</button></td>
+                <td> @using (Html.BeginForm("List" , "Car", FormMethod.Post))
+                {
+                    <inpust typeof="hidden" name="Id" value="@car.Id" />
+                    <button type="submit">Usun</button>
+
+                    }</td>
+                <td>
+                    @using (Html.BeginForm("Edit", "Car",new { Id = car.Id }, FormMethod.Post))
+                    {
+                    <inpust typeof="hidden" name="Id" value="@car.Id" />
+                    <button type="submit">Edytuj</button>
+
+                    }</td>
             </tr>
         }
     </tbody>

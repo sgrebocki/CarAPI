@@ -16,15 +16,15 @@ namespace CarAPI.Models
         public string Brand { get; set; } = string.Empty;
 
         [Display(Name = "Model")]
-        [Required]
+        [Required(ErrorMessage = "Błędna wartość")]
         public string Model { get; set; } = string.Empty;
 
         [Display(Name = "Moc (w KM)")]
-        [Required]
+        [Required(ErrorMessage = "Błędna wartość")]
         public int Power { get; set; }
 
         [Display(Name = "Rok produkcji")]
-        [Required]
+        [Required(ErrorMessage = "Błędna wartość")]
         public int ProductionYear { get; set; }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model List<CarAPI.Models.Car>
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Lista Samochodow</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Moc</th>
+            <th>Rok produkcji</th>
+            <th>  </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Id</td>
+                <td>@car.Brand</td>
+                <td>@car.Model</td>
+                <td>@car.Power</td>
+                <td>@car.ProductionYear</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

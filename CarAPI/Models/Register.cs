@@ -6,14 +6,14 @@ namespace CarAPI.Models
     public class Register
     {
 
-       [Required]
-       public string UserName { get; set; }
+        [Required(ErrorMessage = "Błędna nazwa użytkownika")]
+        public string UserName { get; set; }
 
-        [EmailAddress]
-        [Required]
+        [EmailAddress(ErrorMessage = "Zły adres email")]
+        [Required(ErrorMessage = "Zły adres email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Błędne Hasło")]
         public string Password { get; set; } 
         
             

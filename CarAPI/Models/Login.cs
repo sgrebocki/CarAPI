@@ -4,10 +4,10 @@ namespace CarAPI.Models
 {
     public class Login
     {
-        [Required]
+        [Required(ErrorMessage = "Błędna nazwa użytkownika")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Błędne hasło")]
         public string Password { get; set; }
     }
 }
