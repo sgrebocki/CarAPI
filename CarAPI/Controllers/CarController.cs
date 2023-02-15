@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using CarAPI.Models;
+﻿using CarAPI.Models;
 using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -111,12 +108,12 @@ namespace CarAPI.Controllers
             try
             {
                 _repo.DeleteCar(id);
-                return RedirectToAction("List");
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {
                 return View();
-            }
+            }           
         }
     }
 }

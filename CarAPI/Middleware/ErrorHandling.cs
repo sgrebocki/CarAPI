@@ -2,7 +2,7 @@
 
 namespace CarAPI.Middleware
 {
-    public class ErrorHandling
+    public class ErrorHandling : IMiddleware
     {
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
@@ -23,7 +23,7 @@ namespace CarAPI.Middleware
             catch (SystemException)
             {
                 context.Response.StatusCode = 500;
-                await context.Response.WriteAsJsonAsync("Something went wrong");
+                await context.Response.WriteAsJsonAsync("Coś poszło nie tak");
             }
         }
     }

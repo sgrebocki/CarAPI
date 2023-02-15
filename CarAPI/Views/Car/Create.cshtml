@@ -3,22 +3,28 @@
     ViewData["Title"] = "Dodaj samochód";
 }
 <h1>Dodaj samochód</h1>
-<form method="post" action="Create" class="mt-5">
-  <div class="form-group">
-        <label for="" class="form-label">Marka</label>
-        <input type="text" class="form-control" asp-for="Brand" >
-  </div>
-  <div class="form-group">
-    <label for="" class="form-label">Model</label>
-        <input type="text" class="form-control" asp-for="Model">
-  </div>
-  <div class="form-group">
-        <label for="" class="form-label">Moc</label>
-        <input type="number" class="form-control" asp-for="Power">
-  </div>
-  <div class="form-group">
-        <label for="" class="form-label">Rok produkcji</label>       
-        <input type="number" class="form-control" placeholder="YYYY" min="1950" max="2100" asp-for="ProductionYear">
-  </div>
-  <button type="submit" class="btn btn-primary">Gotowe</button>
-</form>
+<div class="mt-5">
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="Brand" class="form-label">Marka</label>
+            <input type="text" class="form-control" asp-for="Brand" >
+        </div>
+        <div class="form-group">
+            <label asp-for="Model" class="form-label">Model</label>
+            <input type="text" class="form-control" asp-for="Model">
+        </div>
+        <div class="form-group">
+            <label asp-for="Power" class="form-label">Moc (w KM)</label>
+            <input type="number" class="form-control" asp-for="Power">
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductionYear" class="form-label">Rok produkcji</label>
+            <input type="number" class="form-control" placeholder="YYYY" min="1950" max="2023" asp-for="ProductionYear">
+        </div>
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index"><i class="btn btn-outline-dark">Wróć do listy samochodów</i></a>
+</div>

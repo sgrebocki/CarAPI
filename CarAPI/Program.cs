@@ -1,11 +1,11 @@
 global using CarAPI.Data;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.EntityFrameworkCore;
+using CarAPI.Middleware;
 using CarAPI.Models;
 using CarAPI.Repositories;
 using CarAPI.Repositories.IRepositories;
 using Microsoft.AspNetCore.Identity;
-using System.Net.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,19 +24,11 @@ builder.Services.AddIdentity<UserModel, IdentityRole >(options =>
     options.Password.RequireNonAlphanumeric = false ;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
-
-
-
-
-
 }).AddEntityFrameworkStores<DataContext>();
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
+builder.Services.AddTransient<ErrorHandling>();
 
 var app = builder.Build();
 
@@ -59,6 +51,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseMiddleware<ErrorHandling>();
+
 app.UseRouting();
 
 app.UseAuthentication();
@@ -70,6 +64,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-var client = new HttpClient();
-client.DefaultRequestHeaders.Add("Swagger", "true");

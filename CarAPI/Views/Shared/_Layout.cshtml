@@ -25,22 +25,11 @@
                         @if (User.Identity.IsAuthenticated)
                        { 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Samochody</a>
-                            </li>
-                       
-                            
-                       
-                       
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Lista samochodów</a>
+                            </li>                                                                                              
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Create">Dodaj samochód</a>
-                            </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Edit">Edytuj samochód</a>
-                        </li>
-
-                       
-             
+                            </li>                                  
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Wyloguj</a>
                             </li>
@@ -54,7 +43,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Rejestracja</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="List">Lista Samcchodow</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="List">Lista Samochodów</a>
                             </li>
                         }
                         

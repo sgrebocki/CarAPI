@@ -1,7 +1,16 @@
-﻿
+﻿@model CarAPI.Models.Car
 @{
-    ViewData["Title"] = "Wyszukaj po Id";
+    ViewData["Title"] = "Szczegóły";
 }
 
-<h1>Wyszukaj po Id</h1>
+<h1>Szczegóły</h1>
 
+<p><b>Id:</b> @Model.Id</p>
+<p><b>Marka:</b> @Model.Brand</p>
+<p><b>Model:</b> @Model.Model</p>
+<p><b>Moc (w KM):</b> @Model.Power</p>
+<p><b>Rok produkcji:</b> @Model.ProductionYear</p>
+
+<div>
+    <a asp-action="Index"><i class="btn btn-outline-dark">Wróć do listy samochodów</i></a>
+</div>

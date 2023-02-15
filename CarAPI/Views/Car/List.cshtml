@@ -1,16 +1,17 @@
 ﻿@model List<CarAPI.Models.Car>
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Lista samochodów";
 }
+@{int rowNo = 1;}
 
-<h1>Lista Samochodow</h1>
+<h1>Lista samochodów</h1>
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>LP.</th>
             <th>Marka</th>
             <th>Model</th>
-            <th>Moc</th>
+            <th>Moc (w KM)</th>
             <th>Rok produkcji</th>
             <th>  </th>
         </tr>
@@ -19,7 +20,7 @@
         @foreach (var car in Model)
         {
             <tr>
-                <td>@car.Id</td>
+                <td>@((rowNo++) + ".")</td>
                 <td>@car.Brand</td>
                 <td>@car.Model</td>
                 <td>@car.Power</td>

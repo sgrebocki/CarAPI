@@ -5,12 +5,17 @@
 @using(Html.BeginForm("Register", "Account" , FormMethod.Post))
 {
     @Html.ValidationSummary();
-
+    <div>
     <span>Login: </span> @Html.TextBoxFor(x => x.UserName)
+    </div>
+    <div>
     <span>Email: </span> @Html.TextBoxFor(x => x.Email)
-    <span>Password: </span> @Html.PasswordFor(x => x.Password)
+    </div>
+    <div>
+    <span>Hasło: </span> @Html.PasswordFor(x => x.Password)
+    </div>
 
-    <button type="submit">Rejestruj</button>
+    <button class="btn btn-primary" type="submit">Zarejestruj</button>
 
 }
 
